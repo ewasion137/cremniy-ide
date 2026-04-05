@@ -1,55 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cremniy IDE - Low-level toolkit</title>
-    <!-- Подключаем Tailwind (магия без установки node_modules) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        // Цвета в стиле GitHub Dark / VS Code
-                        gray: { 900: '#0d1117', 800: '#161b22', 700: '#21262d' } 
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Подключаем наш отдельный CSS файл -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-900 text-gray-300 font-sans antialiased selection:bg-blue-500 selection:text-white">
+<body>
 
-    <!-- Главный блок (Hero) -->
-    <div class="max-w-5xl mx-auto px-6 py-20 text-center mt-10">
-        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-white">
-            Cremniy <span class="text-blue-500">IDE</span>
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto">
-            HEX-editor, disassembler, and code editor strictly in a single window. 
+    <!-- Навигация -->
+    <header class="navbar fade-in">
+        <div class="logo-container">
+            <img src="resources/cremniyicon.png" alt="Cremniy Logo" class="logo">
+            <span class="logo-text">Cremniy</span>
+        </div>
+        <nav class="nav-links">
+            <a href="https://github.com/ewasion137/cremniy-ide" target="_blank">GitHub</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
+
+    <!-- Главный экран -->
+    <main class="hero fade-in-up delay-1">
+        <h1 class="hero-title">All tools in a <span class="highlight">single window</span>.</h1>
+        <p class="hero-subtitle">
+            HEX-editor, disassembler, and code editor strictly combined. <br>
             Built for low-level development.
         </p>
         
-        <!-- Кнопки -->
-        <div class="flex justify-center gap-4">
-            <a href="https://github.com/munirov/cremniy/releases" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition duration-200">
-                Download v0.2.0
-            </a>
-            <a href="https://github.com/munirov/cremniy" target="_blank" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-bold py-3 px-8 rounded-lg transition duration-200">
-                GitHub
-            </a>
+        <div class="hero-buttons">
+            <a href="https://github.com/munirov/cremniy/releases" class="btn btn-primary">Download v0.2.0</a>
+            <a href="https://github.com/munirov/cremniy" target="_blank" class="btn btn-secondary">Source Code</a>
         </div>
+    </main>
 
-        <!-- Место под крутой скриншот -->
-        <div class="mt-16 bg-gray-800 border border-gray-700 rounded-xl shadow-2xl h-96 flex items-center justify-center overflow-hidden">
-            <p class="text-gray-500">[ Сюда закинем сочный скриншот интерфейса проги ]</p>
-            <!-- Когда будет картинка, раскомментируй это:
-            <img src="screenshot.png" alt="Cremniy IDE Interface" class="w-full h-full object-cover">
-            -->
+    <!-- Демонстрация (Гифка) -->
+    <section class="demo-section fade-in-up delay-2">
+        <div class="window-frame">
+            <div class="window-header">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <!-- Твоя гифка -->
+            <img src="resources/progview.gif" alt="Cremniy IDE in action" class="demo-gif">
         </div>
-    </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer fade-in delay-3">
+        <p>Cremniy IDE © 2026. Open-source low-level toolkit.</p>
+    </footer>
 
 </body>
 </html>
