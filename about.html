@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Cremniy IDE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Навигация (такая же как на главной) -->
+    <header class="navbar fade-in">
+        <div class="logo-container">
+            <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+                <img src="resources/cremniyicon.png" alt="Cremniy Logo" class="logo">
+                <span class="logo-text">Cremniy</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="https://github.com/ewasion137/cremniy-ide" target="_blank">GitHub</a>
+        </nav>
+    </header>
+
+    <main class="about-section fade-in-up delay-1">
+        <h1 class="hero-title" style="font-size: 2.5rem;">About <span class="highlight">Us</span></h1>
+        <p class="hero-subtitle">The team and contributors behind the Cremniy IDE.</p>
+        
+        <!-- Сюда скрипт загрузит карточки контрибьюторов -->
+        <div id="team-grid" class="team-grid">
+            <p class="loading-text">Loading contributors from GitHub...</p>
+        </div>
+    </main>
+
+    <footer class="footer fade-in delay-3">
+        <p>Cremniy IDE © 2026. Open-source low-level toolkit.</p>
+    </footer>
+
+    <!-- МАГИЯ: Скрипт для получения контрибьюторов -->
+    <script>
+        async function loadContributors() {
+            const grid = document.getElementById('team-grid');
+            try {
+                // Стучимся в API вашего оригинального репозитория
+                const response = await fetch('https://api.github.com/repos/munirov/cremniy/contributors');
+                if (!response.ok) throw new Error('Failed to fetch');
+                
+                const contributors = await response.json();
+                grid.innerHTML = ''; // Очищаем текст "Loading..."
+
+                contributors.forEach((user, index) => {
+                    // Определяем роль (если логин igmunv или munirov — ставим Maintainer)
+                    const username = user.login.toLowerCase();
+                    const isMaintainer = username === 'igmunv' || username === 'munirov';
+                    const role = isMaintainer ? 'Maintainer' : 'Contributor';
+                    
+                    // Добавляем класс maintainer для особого стиля и небольшую задержку анимации (чтобы появлялись по очереди)
+                    const cardClass = isMaintainer ? 'team-card maintainer' : 'team-card';
+                    const delay = index * 0.1; // Плавное появление по цепочке
+
+                    // Создаем HTML карточки
+                    grid.innerHTML += `
+                        <a href="${user.html_url}" target="_blank" class="${cardClass} fade-in-up" style="animation-delay: ${delay}s">
+                            <img src="${user.avatar_url}" alt="${user.login}" class="team-avatar">
+                            <h3 class="team-name">${user.login}</h3>
+                            <p class="team-role">${role}</p>
+                        </a>
+                    `;
+                });
+            } catch (error) {
+                grid.innerHTML = '<p style="color: #ff5f56;">Failed to load contributors. Please check your connection or GitHub API limits.</p>';
+                console.error(error);
+            }
+        }
+
+        // Запускаем загрузку
+        loadContributors();
+    </script>
+</body>
+</html>

@@ -238,3 +238,101 @@ body {
     .hero-buttons { flex-direction: column; }
     .navbar { padding: 15px 20px; }
 }
+
+/* ================= ABOUT US & TEAM SECTION ================= */
+.about-section {
+    max-width: 900px;
+    margin: 60px auto 100px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.team-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-color: var(--text-muted);
+}
+
+.team-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid var(--border-color);
+    transition: border-color 0.3s ease;
+}
+
+.team-card:hover .team-avatar {
+    border-color: var(--accent-color);
+}
+
+.team-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.team-role {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Особый стиль для Maintainer */
+.team-card.maintainer {
+    border-color: var(--accent-color);
+    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, var(--surface-color) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card.maintainer .team-role {
+    color: var(--accent-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+/* Легкое свечение для Мейнтейнера */
+.team-card.maintainer::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.team-card.maintainer:hover::before {
+    opacity: 1;
+}
+
+.loading-text {
+    grid-column: 1 / -1;
+    color: var(--text-muted);
+    font-style: italic;
+}
